@@ -1,0 +1,87 @@
+{% extends 'layout.html' %}
+
+{% block head %} 
+
+Welcome, {{session['first_name']}}
+
+<style> 
+    h3 {
+        margin-top: 25px;
+    }
+</style>
+
+{% endblock %}
+
+{% block functions %}
+
+    <p>All posted recipes:</p>
+    <a href="/create">
+        <button class='btn btn-outline-secondary btn-sm'type="button">Create</button>
+    </a>
+    <a href="/logout">
+        <button class='btn btn-outline-secondary btn-sm'type="button">Logout</button>
+    </a>
+
+<style>
+    #functions {
+        width: 95%;
+        margin-top: 25px;
+        padding: 0;
+    }
+    p {
+        margin: 0px 25px 0px 0px;
+    }
+    button {
+        height: 30px;
+    }
+
+    #functions a {
+        margin-right: 1px;
+    }
+    
+</style>
+
+{% endblock %}
+
+{% block content %}
+    <table class="table table-hover">
+        <thead>
+            <tr class="table-dark">
+                <th>Name</th>
+                <th>Under 30min</th>
+                <th>Posted By</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for r in recipe_list %}
+            <tr>
+                <td>{{ r.name }}</td>
+                {% if r.under_30 == 1 %}
+                    <td>Yes</td>
+                {% else %}
+                    <td>No</td>
+                {% endif %}
+                <td>{{ r.user_name.first_name }}</td>
+                {% if session['user_id'] == r.user_name.id %}
+                    <td><a href='/recipe/show/{{r.id}}'>Show</a>|<a href='/recipe/edit/{{r.id}}'>Edit</a>|<a href='/recipe/delete/{{r.id}}'>Delete</a></td>
+                {% else %}
+                    <td><a href='/recipe/show/{{r.id}}'>Show</a></td>
+                {% endif %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <style>
+        a {
+            font-size: 10px;
+        }
+        td {
+            font-size: 15px;
+        }
+        table {
+            margin-top: 25px;
+        }
+    </style>
+{% endblock %}

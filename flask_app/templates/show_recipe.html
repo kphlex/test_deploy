@@ -1,0 +1,109 @@
+{% extends 'layout.html' %}
+
+{% block head %} 
+
+Welcome, {{session['first_name']}}
+
+<style> 
+    h3 {
+        margin-top: 25px;
+    }
+</style>
+
+{% endblock %}
+
+{% block functions %}
+
+    <h4>{{ recipe.name }}</h4>
+    <a href="/dashboard">
+        <button class='btn btn-outline-secondary btn-sm'type="button">All Recipes</button>
+    </a>
+    <a href="/logout">
+        <button class='btn btn-outline-secondary btn-sm'type="button">Logout</button>
+    </a>
+
+<style>
+    #functions {
+        width: 95%;
+        margin-top: 25px;
+        padding: 0;
+    }
+    p {
+        margin: 0px 25px 0px 0px;
+    }
+    button {
+        height: 30px;
+    }
+
+    #functions a {
+        margin-right: 1px;
+    }
+    
+    h4 {
+        color: #A52FFF;
+    }
+</style>
+
+{% endblock %}
+
+
+
+
+
+
+{% block content %}
+<div class="show">
+    <div class = 'info'>
+        <h5>Created By:</h5> 
+        <p>{{ recipe.user_name.first_name }} {{ recipe.user_name.last_name }}</p>
+    </div>
+    <div class = 'info'>
+        <h5>Description:</h5> 
+        <p>{{ recipe.description }}</p>
+    </div>
+    <div class = 'info'>
+        <h5>Instructions:</h5> 
+        <p>{{ recipe.instructions }}</p>
+    </div>
+    {% if recipe.under_30 == 1%}
+    <div class = 'info'>
+        <h5>Under 30 minutes:</h5> 
+        <p>Yes</p>
+    </div>
+    {% else %}
+    <div class = 'info'>
+        <h5>Under 30 minutes:</h5> 
+        <p>No</p>
+    </div>
+    {% endif %}
+    <div class = 'info'>
+        <h5>Created on:</h5> 
+        <p>{{ recipe.created_at.strftime('%b %d %Y') }}</p>
+    </div>
+    <div class="info">
+        <a href='/recipe/edit/{{ recipe.id }}'>Edit</a>|<a href='/recipe/delete/{{ recipe.id }}'>Delete</a>
+    </div>
+</div>
+
+<style>
+    .show {
+        height: 45vh;
+        margin-top: 25px;
+        border: 2px solid rgb(137, 143, 145);
+        border-radius: 5px;
+        box-shadow: 5px 5px 5px rgb(182, 186, 216);
+        display: flex;
+        flex-direction: column;
+    }
+    .info {
+        width: 80%;
+        margin: 40px 0px 0px 40px;
+        display: flex;
+        text-align: center;
+        justify-content: space-between;
+    }
+    h5, p {
+        margin: 0;
+    }
+</style>
+{% endblock %}

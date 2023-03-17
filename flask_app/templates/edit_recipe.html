@@ -1,0 +1,97 @@
+{% extends 'layout.html' %}
+
+{% block head %} 
+
+Edit Your Recipe, {{session['first_name']}}!
+
+<style> 
+    h3 {
+        margin-top: 25px;
+    }
+</style>
+
+
+    <a href="/dashboard">
+        <button class='btn btn-outline-secondary btn-sm'type="button">Back to Recipes</button>
+    </a>
+    <a href="/logout">
+        <button class='btn btn-outline-secondary btn-sm'type="button">Logout</button>
+    </a>
+
+<style>
+    p {
+        margin: 0px 25px 0px 0px;
+    }
+    button {
+        height: 30px;
+    }
+    a {
+        margin: 0px 0px 25px 20px;
+    }
+    #head {
+        margin-left: 8px;
+    }
+</style>
+
+{% endblock %}
+
+
+
+{% block content %}
+
+    <form action="/update/recipe" method="POST">
+        <input type="hidden" name="id">
+        <input type="hidden" name= "user_id" value="{{ session['user_id'] }}">
+        </div>
+        <div class="mb-3">
+            <label for="name" class="form-label">Name:</label>
+            <input name='name'type="text" class="form-control" id="name" value="{{recipe.name}}">
+        </div>
+        <div class="mb-3">
+            <label class="form-label" for="floatingTextarea">Description:</label>
+            <div class="form-floating">
+                <textarea name = "description" class="form-control" value="{{ recipe.description }}" id="floatingTextarea"></textarea>
+            </div>
+        </div>
+        <div class="mb-3">
+            <label class="form-label" for="floatingTextarea">Instructions:</label>
+            <div class="form-floating">
+                <textarea name="instructions" class="form-control" value="{{ recipe.intructions }}" id="floatingTextarea"></textarea>
+            </div>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Under 30 minutes:</label>
+            <input class="form-check-input" type="radio" name="under_30" value='1' id="under_301">
+            <label class="form-check-label" for="under_301">Yes</label>
+            <input class="form-check-input" type="radio" name="under_30" value='0' id="under_302">
+            <label class="form-check-label" for="under_302">No</label>
+        </div>
+        <div class="mb-3">
+            <label for="created_at">Date Created:</label>
+            <input type="date" id="created_at" name="created_at">
+        </div>
+        <div>
+            <button type="submit" class="btn btn-dark">Submit</button>
+        </div>
+    </form>
+
+    <style>
+        a {
+            font-size: 15px;
+        }
+        #main {
+            width: 100%;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .mb-3 {
+            margin: 0;
+        }
+
+        form {
+            margin-top: 25px;
+        }
+    </style>
+{% endblock %}

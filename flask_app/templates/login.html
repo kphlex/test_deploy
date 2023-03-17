@@ -1,0 +1,106 @@
+{% extends 'layout.html' %}
+
+
+
+{% block content %}
+
+<div class="moveThis">
+    <h3>Registration</h3>
+    <form action="/register/user" method="POST">
+        <input type="hidden" name="id">
+        <div class="mb-3">
+            <label for="first_name" class="form-label">First Name:</label>
+            <input name='first_name'type="text" class="form-control" id="first_name">
+        </div>
+        <div class="mb-3">
+            <label for="last_name" class="form-label">Last Name:</label>
+            <input name='last_name'type="text" class="form-control" id="last_name">
+        </div>
+        <div class="mb-3">
+            <label for="email" class="form-label">Email:</label>
+            <input name='email' type="email" class="form-control" id="email">
+        </div>
+        <div class="mb-3">
+            <label for="password" class="form-label">Password:</label>
+            <input name='password' type="password" class="form-control" id="password">
+        </div>
+        <div class="mb-3">
+            <label for="password" class="form-label">Confirm Password:</label>
+            <input name='conf_password' type="password" class="form-control" id="password">
+        </div>
+        <div class="movebtn">
+        <button type="submit" class="btn btn-dark">Submit</button>
+        </div>
+    </form>
+</div>
+<div class="ERROR">
+    {% with messages = get_flashed_messages(category_filter=['register']) %}
+    {% if messages %}
+        <ul>
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    {% endwith %}
+</div>
+
+<style>
+    .movebtn {
+        display: flex;
+        justify-content: center;
+    }
+    .ERROR {
+        color: red;
+        padding: 20px;
+    }
+
+</style>
+{% endblock %}
+
+
+{% block recipe %}
+
+<div>
+    <h3>User Login</h3>
+    <form action="/login/user" method="POST">
+        <input type="hidden" name="id">
+        <div class="mb-3">
+            <label for="email" class="form-label">Email:</label>
+            <input name='email' type="int" class="form-control" id="email">
+        </div>
+        <div class="mb-3">
+            <label for="password" class="form-label">Password:</label>
+            <input name='password' type="password" class="form-control" id="password">
+        </div>
+        <div class="movebtn">
+        <button type="submit" class="btn btn-dark">Submit</button>
+        </div>
+    </form>
+</div>
+
+<style>
+    .two {
+        border-left: 2px solid rgb(140, 153, 168);
+        padding-left: 40px;
+        width: 100%;
+        margin-left: 20px;
+    }
+    .moveThis {
+        width: 100%;
+    }
+</style>
+<div class="ERROR">
+    {% with messages = get_flashed_messages(category_filter=['login']) %}
+    {% if messages %}
+        <ul>
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    {% endwith %}
+</div>
+
+
+{% endblock %}
