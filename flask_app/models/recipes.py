@@ -3,7 +3,7 @@ from flask_app.models import user
 from flask import flash
 
 class Recipe:
-    DB = "recipes_DB"
+    DB = "burgers"
     def __init__(self, data ):
         self.id = data['id']
         self.user_id = data['user_id']
